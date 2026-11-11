@@ -1,5 +1,5 @@
 name: Envault secrets
-description: Load secrets from Envault into a job with GitHub OIDC; no stored credentials. Needs `permissions: id-token: write`.
+description: 'Load secrets from Envault into a job with GitHub OIDC; no stored credentials. Needs `permissions: id-token: write`.'
 author: Poyesis
 branding:
   icon: lock
@@ -20,7 +20,7 @@ inputs:
     required: false
     default: envault
   keys:
-    description: Optional comma- or newline-separated list of keys to load. Missing keys fail the step. Default: all.
+    description: 'Optional comma- or newline-separated list of keys to load. Missing keys fail the step. Default: all.'
     required: false
     default: ''
   export-to-env:

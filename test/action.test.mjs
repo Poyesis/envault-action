@@ -238,3 +238,15 @@ describe('Poyesis/envault-action', () => {
     assert.match(err.stdout, /^::error::GitHub OIDC is not available/);
   });
 });
+
+describe('action.yml', () => {
+  // The runner refuses the whole action when a plain (unquoted) YAML value holds ": ".
+  it('quotes every value that contains ": "', () => {
+    const text = fs.readFileSync(new URL('../action.yml', import.meta.url), 'utf8');
+    const bad = text.split('\n').filter((line) => {
+      const m = /^\s*[\w-]+: (.+)$/.exec(line);
+      return m && !/^['"|>]/.test(m[1]) && m[1].includes(': ');
+    });
+    assert.deepEqual(bad, []);
+  });
+});
