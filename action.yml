@@ -1,0 +1,43 @@
+name: Envault secrets
+description: Load secrets from Envault into a job with GitHub OIDC; no stored credentials. Needs `permissions: id-token: write`.
+author: Poyesis
+branding:
+  icon: lock
+  color: gray-dark
+inputs:
+  api-url:
+    description: Envault API base URL. Change it only for a self-hosted Envault.
+    required: false
+    default: https://api.envault.poyesis.fr
+  project-id:
+    description: Envault project id; for a project with platforms, the platform's id (envault projects list).
+    required: true
+  environment:
+    description: Environment name (dev, staging, prod, ...).
+    required: true
+  audience:
+    description: Audience requested for the GitHub OIDC token; must match the Envault workload issuer config.
+    required: false
+    default: envault
+  keys:
+    description: Optional comma- or newline-separated list of keys to load. Missing keys fail the step. Default: all.
+    required: false
+    default: ''
+  export-to-env:
+    description: Write secrets to $GITHUB_ENV for later steps.
+    required: false
+    default: 'true'
+  mask:
+    description: Mask every value in logs (strongly recommended).
+    required: false
+    default: 'true'
+  set-outputs:
+    description: Also expose each secret as a step output (steps.<id>.outputs.<KEY>).
+    required: false
+    default: 'false'
+outputs:
+  keys:
+    description: Comma-separated names of the loaded secrets (never values).
+runs:
+  using: node24
+  main: dist/index.js

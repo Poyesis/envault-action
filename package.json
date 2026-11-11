@@ -1,0 +1,11 @@
+{
+  "name": "envault-action",
+  "version": "0.1.0",
+  "private": true,
+  "description": "GitHub Action: load Envault secrets with GitHub OIDC (no stored credentials)",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "node --test 'test/*.test.mjs'"
+  }
+}
